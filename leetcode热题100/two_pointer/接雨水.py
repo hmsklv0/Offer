@@ -67,17 +67,42 @@ class Solution:
         return result
 
     def trap2(self, height: List[int]) -> int:
+        # 官方题解1
+        # 找到每个 i 所对应的左右最大边
         left_max, right_max = [0 for _ in range(len(height))], [0 for _ in range(len(height))]
+
         left_max[0] = height[0]
         for i in range(1, len(height)):
             left_max[i] = max(left_max[i - 1], height[i])
+
         right_max[-1] = height[-1]
         for i in range(len(height) - 1, -1, -1):
             right_max[i] = max(right_max[i + 1], height[i])
+
         ans = 0
         for j in range(len(height)):
-            # 不用担心为负值
+            # 不用担心为负值，因为如果height[j]如果比两边都高，那么left_max[j] 和 right_max[j]都将为其本身
             ans += min(left_max[j], right_max[j]) - height[j]
+        return ans
+
+    def trap3(self, height: List[int]) -> int:
+        ans = 0
+        left, right = 0, len(height)-1
+        left_max, right_max = 0, 0
+
+        while left <= right:
+            # https://leetcode.cn/problems/trapping-rain-water/?envType=study-plan-v2&envId=top-100-liked
+            # 更新自己的左右最大边界
+            left_max = max(left_max, height[left])
+            right_max = max(right_max, height[right])
+            # 可行性分析，从两边往中间靠，核心原理
+            # 当两边最高处比较，一定是较小的一端先靠过来，因此比较的就是较小的那边最大值去减当前height
+            if height[left] < height[right]:
+                ans += left_max - height[left]
+                left += 1
+            else:
+                ans += right_max - height[right]
+                right -= 1
         return ans
 
 
