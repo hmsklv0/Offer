@@ -1,5 +1,7 @@
 # trapping-rain-water
 # 接雨水
+from typing import List
+
 
 class Solution:
     def trap(self, height: list[int]) -> int:
@@ -64,6 +66,20 @@ class Solution:
 
         return result
 
+    def trap2(self, height: List[int]) -> int:
+        left_max, right_max = [0 for _ in range(len(height))], [0 for _ in range(len(height))]
+        left_max[0] = height[0]
+        for i in range(1, len(height)):
+            left_max[i] = max(left_max[i - 1], height[i])
+        right_max[-1] = height[-1]
+        for i in range(len(height) - 1, -1, -1):
+            right_max[i] = max(right_max[i + 1], height[i])
+        ans = 0
+        for j in range(len(height)):
+            # 不用担心为负值
+            ans += min(left_max[j], right_max[j]) - height[j]
+        return ans
+
 
 height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
 height2 = [4, 2, 0, 3, 2, 5]  # 第一个峰和最后一个峰
@@ -71,6 +87,6 @@ height3 = [5, 5, 1, 7, 1, 1, 5, 2, 7, 6]  # 平缓的第一个峰
 height4 = [6, 4, 2, 0, 3, 2, 0, 3, 1, 4, 5, 3, 2, 7, 5, 3, 0, 1, 2, 1, 3, 4, 6, 8, 1, 3]  # 高的峰中间夹着比较低的峰
 height5 = [9, 6, 8, 8, 5, 6, 3]  # 平缓的峰
 height6 = [8, 8, 1, 5, 6, 2, 5, 3, 3, 9]  # 高的峰中间夹着比较低的峰，删除较低的峰后，前面的峰变成地峰
-height7 = [1, 1, 1, 1, 1, 1, 1, 1] # 重复元素
+height7 = [1, 1, 1, 1, 1, 1, 1, 1]  # 重复元素
 a = Solution()
 print(a.trap(height6))
