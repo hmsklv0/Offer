@@ -32,8 +32,6 @@ class Solution:
                 left_pointer += 1
             right_pointer += 1
 
-
-
     def moveZeroes2(self, nums: list[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
@@ -51,8 +49,23 @@ class Solution:
                 move_step = zeroes_list.index(i - 1) + 1
             nums[i - move_step] = nums[i]
 
-        for i in range(len(nums) - len(zeroes_list),  len(nums)):
+        for i in range(len(nums) - len(zeroes_list), len(nums)):
             nums[i] = 0
+
+    def moveZeroes3(self, nums: list[int]) -> None:
+        # 灵感来自代码随想录中数组分类中的移除元素
+        fast, slow = 0, 0
+        while fast < len(nums):
+            if nums[fast] != 0:
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+        while slow < len(nums):
+            nums[slow] = 0
+            slow += 1
+
+
+
 
 a = Solution()
 a_list = [1]
