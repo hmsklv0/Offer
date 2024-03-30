@@ -15,6 +15,7 @@ class Solution:
             if nums[i] > 0:
                 break
             if i > 0 and nums[i - 1] == nums[i]:
+                # 去重
                 continue
             left_pointer, right_pointer = i + 1, nums_len - 1
             while left_pointer < right_pointer:

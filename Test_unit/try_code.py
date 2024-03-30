@@ -130,15 +130,29 @@ def func16():
 
 
 def func17():
+    # 测试遍历结果
     for i in range(3):
         print(i)
         if i == 1:
             i -= 1
-# 0
-# 1
-# 2
+    # 0
+    # 1
+    # 2
 
-func17()
+
+def func18():
+    test_dict = {}
+
+
+def func19():
+    res = set()
+    add_item = [1, 2, 3]
+    res.add(add_item)
+
+
+func19()
+
+# func17()
 # func15()
 # func7()
 # func8()
