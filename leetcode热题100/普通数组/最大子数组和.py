@@ -7,9 +7,23 @@ class Solution:
         res = nums[0]
         # 借助动态规划的思想，逐个添加，在这个过程中记录连续子数组和
         for i in range(1, len(nums)):
-            nums[i] = max(nums[i], nums[i-1] + nums[i])
+            nums[i] = max(nums[i], nums[i - 1] + nums[i])
             res = max(res, nums[i])
         return res
+
+    def maxSubArray2(self, nums: list[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        res = nums[0]
+        dp = [0 for _ in range(len(nums))]
+        dp[0] = nums[0]
+        # 借助动态规划的思想，逐个添加，在这个过程中记录连续子数组和
+        # dp 记录以 i 结尾的最大连续子数组和
+        for i in range(1, len(nums)):
+            dp[i] = max(nums[i], dp[i - 1] + nums[i])
+            res = max(res, dp[i])
+        return res
+
 
 a = Solution()
 # nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
