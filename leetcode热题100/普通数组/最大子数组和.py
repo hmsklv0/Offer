@@ -1,5 +1,6 @@
 # https://mp.weixin.qq.com/s/zXNgpOoFc8K6Lx3FqUkXMg
 # 一个简单的思想，如果前缀+当前值 小于 当前值本身，那么重新开始记录子数组和
+from typing import List
 class Solution:
     def maxSubArray(self, nums: list[int]) -> int:
         if len(nums) == 0:
@@ -24,6 +25,12 @@ class Solution:
             res = max(res, dp[i])
         return res
 
+    def maxSubArray3(self, nums: List[int]) -> int:
+        # 简化版本
+        for i in range(1, len(nums)):
+            if nums[i-1] > 0:
+                nums[i] = nums[i] + nums[i-1]
+        return max(nums)
 
 a = Solution()
 # nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
