@@ -1,3 +1,5 @@
+# https://leetcode.cn/problems/sort-colors/solutions/437968/yan-se-fen-lei-by-leetcode-solution/
+# 题解
 from typing import List
 
 
@@ -55,7 +57,9 @@ class Solution:
 
         # 难点，指针移动条件，即 nums[i] 为0 ，p0移动1
         # nums[i] 为2，p2 移动1
-        # i 和 p0中间为1
+        # i 和 p0 中间为1
+        # p0 之前全为 0
+        # p2 之后全为 2
         # 特殊情况处理，nums[i] 和 p2 交换完成后，需要重新判断是否为2
         # 并且判断是否为0
 

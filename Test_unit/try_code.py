@@ -150,6 +150,13 @@ def func19():
     res.add(add_item)
 
 
+def func20():
+    dict1: dict = {}
+    dict2 = {1: "sdaf"}
+    # 没有自己的hash方法
+    print(hash(dict1))
+
+
 func19()
 
 # func17()

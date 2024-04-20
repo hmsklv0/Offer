@@ -5,6 +5,7 @@ class Solution:
         # 将所有的前缀和计算出来，将查找子数组问题转换为查找两前缀和之间的差值问题
         count = 0
         pre = 0
+        # 补充初始前缀和为0的情况，解决若 前缀和 等于 k 的 case
         pre_dict = {pre: 1}
         for i in range(len(nums)):
             pre += nums[i]

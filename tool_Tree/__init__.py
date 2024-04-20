@@ -1,8 +1,12 @@
+from typing import List, Optional
+
+
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
 
 class Tree:
     def __init__(self, listTree: list[int]):
@@ -29,9 +33,61 @@ class Tree:
             node.right = self.createTree(listTree, 2 * i + 2)
             return node
 
+    @staticmethod
+    def construct_binary_tree(nums: list[int]) -> TreeNode:
+        # 迭代 使用数组构建二叉树
+        if not nums:
+            return None
+        # 1 tree_node_list 用于存放构建好的节点
+        tree_node_list = []
+        for i in range(len(nums)):
+            if nums[i] is not None:
+                node = TreeNode(nums[i])
+            else:
+                node = None
+            tree_node_list.append(node)
+        root: TreeNode = tree_node_list[0]
+
+        # 2 循环匹配判断为父节点找到字节点
+        n = len(tree_node_list)
+        for i in range(n):
+            if tree_node_list[i] is None or 2 * i + 1 > n:
+                # 当前节点为空或者无子节点
+                continue
+            elif 2 * i + 1 < n:
+                # 至少存在左子节点
+                tree_node_list[i].left = tree_node_list[2 * i + 1]
+                if 2 * i + 2 < n:
+                    tree_node_list[i].right = tree_node_list[2 * i + 2]
+        return root
+
+    @staticmethod
+    def printTree2(root: TreeNode):
+        level = 0
+        nums = []
+
+        # 递归调用
+        def helper(cur_level, node: TreeNode, cur_nums: list[list[int]]):
+            if node is not None:
+                # 如果没有当前层没有被创建，则创建一个
+                if len(cur_nums) < cur_level + 1:
+                    cur_nums.append([])
+                # 添加当前节点的值进数组
+                cur_nums[cur_level].append(node.val)
+                # 左节点
+                if node.left is not None:
+                    helper(cur_level + 1, node.left, cur_nums)
+                # 右节点
+                if node.right is not None:
+                    helper(cur_level + 1, node.right, cur_nums)
+
+        helper(level, root, nums)
+        return nums
+
     def printTree(self) -> list[list[int]]:
         level = 0
         nums = []
+
         # 递归调用
         def helper(level, node: TreeNode, nums: list[list[int]]):
             if node is not None:
