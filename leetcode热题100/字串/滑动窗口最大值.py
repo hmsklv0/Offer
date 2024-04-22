@@ -1,12 +1,13 @@
 # 题解 https://leetcode.cn/problems/sliding-window-maximum/solutions/2361228/239-hua-dong-chuang-kou-zui-da-zhi-dan-d-u6h0/?envType=study-plan-v2&envId=top-100-liked
-#
+# 使用辅助栈来记录当前窗口移动中的最大值排序，非严格递减
+# 一方面保证前面的最大值比后面的最大值先进，也通过队列保证先出
 
 import collections
 
 
 class Solution:
     def maxSlidingWindow(self, nums: list[int], k: int) -> list[int]:
-        # 朴素做法
+        # 朴素做法，会超时
         max_w = max(nums[:k])
         maxWindow = [max_w]
 
