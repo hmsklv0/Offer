@@ -14,7 +14,6 @@ class Solution:
                 vote = nums[i]
                 count = 0
 
-
             if nums[i] != vote:
                 count -= 1
             else:
@@ -40,3 +39,17 @@ class Solution:
     def majorityElement3(self, nums: List[int]) -> int:
         a = collections.Counter(nums)
         return a.most_common()[0][0]
+
+    def majorityElement4(self, nums: List[int]) -> int:
+        count = 1
+        e = nums[0]
+        for i in range(1, len(nums)):
+            if nums[i] != e:
+                count -= 1
+            else:
+                count += 1
+
+            if count == 0:
+                e = nums[i]
+                count = 1
+        return e

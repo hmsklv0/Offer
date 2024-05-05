@@ -55,10 +55,9 @@ def count_people2(n, k, t, a):
                         end_time = end_time + k
                     continue
 
-
-
-
     return count
+
+
 n = 5
 k = 2
 t = [1, 2, 3, 4, 5]

@@ -10,9 +10,15 @@ class Solution:
         # dp[i]代表走到第i个位置需要的最少步数
         dp = [float('inf') for i in range(n)]
 
-        dp[0] = 0
         # 递推公式
+        # i, j = 0, 0
+        # if nums[j] + j > i:
+        #     dp[i] = min(dp[i], dp[i-j] + 1)
         # dp[i+j] = min(dp[i+j], dp[i] + 1)
+
+        # 初始化
+        dp[0] = 0
+
         for i in range(n):
             for j in range(1, nums[i] + 1):
                 if i + j <= n - 1:
@@ -41,11 +47,51 @@ class Solution:
                 step += 1
                 cover = next_cover
 
+        return step
+
+    def jump3(self, nums: List[int]) -> int:
+        # 走完这一轮cover, 记录此轮最大cover, 记为下轮cover
+        # 进入下轮cover时间,step + 1
+        n = len(nums)
+        if n == 1:
+            return 0
+        cover = nums[0]
+        next_cover = cover
+        step = 1
+        for i in range(1, n):
+            if i > cover:
+                step += 1
+                cover = next_cover
+            next_cover = max(nums[i] + i, next_cover)
 
         return step
+
+    def jump4(self, nums: List[int]) -> int:
+
+        # 动态规划
+        n = len(nums)
+        # dp[i]代表走到第i个位置需要的最少步数
+        dp = [float('inf') for i in range(n)]
+
+        # 递推公式
+        # i, j = 0, 0
+        # if nums[j] + j > i:
+        #     dp[i] = min(dp[i], dp[j] + 1)
+        # dp[i+j] = min(dp[i+j], dp[i] + 1)
+
+        # 初始化
+        dp[0] = 0
+
+        for i in range(n):
+            for j in range(i + 1):
+                if nums[j] + j >= i:
+                    # print(i, j, nums[j])
+                    dp[i] = min(dp[i], dp[j] + 1)
+            # print(dp)
+        return dp[-1]
 
 
 a = Solution()
 nums = [2, 3, 1, 1, 4]
-# nums = [0]
+nums = [0]
 print(a.jump2(nums))

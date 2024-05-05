@@ -24,3 +24,29 @@ class Solution:
             result = max(result, dp[i])
         print(dp)
         return result
+
+    def lengthOfLIS2(self, nums: List[int]) -> int:
+
+        # 1 dp[i] 代表以 nums[i] 结尾的 最长递增子序列 的长度
+        dp = [1 for i in range(len(nums))]
+
+        # 2 递推公式，状态转移方程
+        # 对 nums[i] 遍历从 0 到 i-1 中所有的子序列
+        # 取子序列的最大值
+        # if nums[i] > nums[j]:
+        #     dp[i] = max(dp[i], dp[j] + 1)
+
+        # 3 初始化
+        # nums = [1]
+        # 以 1 结尾的数组怎么找子序列的长度？
+        # 因此初始化就应该为1
+        # dp[0] = 1
+
+        # 4 遍历顺序
+        for i in range(1, len(nums)):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+            # print(dp)
+
+        return max(dp)

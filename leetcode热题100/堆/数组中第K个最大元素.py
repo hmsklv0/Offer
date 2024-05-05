@@ -75,7 +75,7 @@ class Solution:
                 return i - 10000
         return 0
 
-    def findKthLargest4(self, nums, k):
+    def findKthLargest5(self, nums, k):
         def heapify_max2(heap: List[int], index: int, heapSize: int) -> None:
             left = index * 2 + 1
             while left < heapSize:

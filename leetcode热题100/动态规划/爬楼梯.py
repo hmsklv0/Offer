@@ -34,16 +34,18 @@ class Solution:
         # 动态规划
         if n <= 2:
             return n
+        # dp[i] 代表 第 i + 1 阶楼梯有多少种方法爬到
+        dp = [0 for _ in range(n)]
+        # 初始化
+        dp[0] = 1
+        dp[1] = 2
 
-        dp = [0 for _ in range(n + 1)]
-        dp[1] = 1
-        dp[2] = 2
-
-        for i in range(3, n + 1):
+        # 迭代方式
+        # dp[i] = dp[i-1] + dp[i-2]
+        for i in range(2, n):
             # 当前步数等于 小一步 和小两步 之和
             dp[i] = dp[i - 1] + dp[i - 2]
-
-        return dp[n]
+        return dp[n - 1]
 
     def climbStairs3(self, n: int) -> int:
         # 动态规划 O(1)空间

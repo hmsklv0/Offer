@@ -12,7 +12,7 @@ class Solution:
 
         for i in range(len(nums)):
             for j in range(target, nums[i]-1, -1):
-                dp[j] = max(dp[j], dp[j-nums[i]]+ nums[i])
+                dp[j] = max(dp[j], dp[j-nums[i]] + nums[i])
         if dp[target] == target:
             return True
         else:

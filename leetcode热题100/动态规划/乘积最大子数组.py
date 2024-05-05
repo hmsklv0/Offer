@@ -19,3 +19,27 @@ class Solution:
                 dp_min[i] = min(dp[i-1]*nums[i-1], dp_min[i-1]*nums[i-1], nums[i-1])
             result = max(result, dp[i], dp_min[i])
         return result
+
+
+    def maxProduct2(self, nums: List[int]) -> int:
+        # 1 dp 记录当前以 nums[i] 结尾的子数组的最大值
+        # 1 dp_min 记录当前以 nums[i] 结尾的子数组的最小值
+        dp = [1 for i in range(len(nums))]
+        dp_min = [1 for i in range(len(nums))]
+
+        # 2 递推公式，状态转移方程
+        # dp[i] = max(nums[i], dp[i-1] * nums[i], dp_min[i-1] * nums[i])
+        # dp_min[i] = min(nums[i], dp[i-1] * nums[i], dp_min[i-1] * nums[i])
+
+        # 3 初始化
+        dp[0] = nums[0]
+        dp_min[0] = nums[0]
+
+        # 4 遍历方式
+        res = dp[0]
+        for i in range(1, len(nums)):
+            dp[i] = max(nums[i], dp[i - 1] * nums[i], dp_min[i - 1] * nums[i])
+            dp_min[i] = min(nums[i], dp[i - 1] * nums[i], dp_min[i - 1] * nums[i])
+            res = max(res, dp[i])
+        return res
+

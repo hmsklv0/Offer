@@ -7,6 +7,7 @@ class Solution:
         n = len(s)
 
         # dp 1 定义 与 3 初始化
+        # 1 dp[i][j] 代表 以s[i]开头和以s[j]结尾的字串 是否为回文字串
         dp = [[False for _ in range(n)] for _ in range(n)]
         result = 0
 

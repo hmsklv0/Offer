@@ -38,6 +38,7 @@ class Solution:
         return [key for key, _ in res]
 
     def topKFrequent4(self, nums: List[int], k: int) -> List[int]:
+        # 使用最小堆实现存储最大的k个元素，只要比堆顶元素大，就入堆
         # 借助堆实现
         nums_dict = collections.Counter(nums)
 

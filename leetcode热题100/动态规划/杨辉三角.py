@@ -1,6 +1,7 @@
 # https://leetcode.cn/problems/pascals-triangle/solutions/510638/yang-hui-san-jiao-by-leetcode-solution-lew9/?envType=study-plan-v2&envId=top-100-liked
 # 官方题解：更加优雅
-
+# https://leetcode.cn/problems/pascals-triangle/solutions/53504/qu-qiao-jie-fa-cuo-yi-wei-zai-zhu-ge-xiang-jia-28m/?envType=study-plan-v2&envId=top-100-liked
+# 题解 取巧解法：错一位再逐个相加
 from typing import List
 
 
@@ -28,8 +29,20 @@ class Solution:
 
         return res
 
+    def generate2(self, numRows: int) -> List[List[int]]:
+        # 上一层的错位相加，补零
+        # 0 1 2 1
+        # 1 2 1 0
+        if numRows == 0:
+            return []
+        res = [[1]]
+        while len(res) < numRows:
+            newRow = [a + b for a, b in zip([0] + res[-1], res[-1] + [0])]
+            res.append(newRow)
+        return res
 
-a = Solution()
+
+c = Solution()
 
 for i in range(1, 6):
-    print(i, '\n', a.generate(i))
+    print(i, '\n', c.generate(i))

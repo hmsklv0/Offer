@@ -1,8 +1,12 @@
 from typing import List
 
 
+# https://leetcode.cn/problems/longest-valid-parentheses/solutions/314683/zui-chang-you-xiao-gua-hao-by-leetcode-solution/?envType=study-plan-v2&envId=top-100-liked
+# 题解
+
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
+        # 自己的思路
         s_len = len(s)
         # 记录当前连续字串长度
         dp = [0 for _ in range(s_len + 1)]
@@ -62,7 +66,37 @@ class Solution:
 
         return result
 
+    def longestValidParentheses3(self, s: str) -> int:
+        # 使用栈解决,栈存储索引
+        # ( 栈增加
+        # 遇到) 栈pop
+        # 用 当前索引减去栈顶元素的索引,就可以得到连续的有效括号的长度,也是当前 ) 结尾的数组的最长连续有效括号长度
+        # 为了保证一直有栈顶元素, 在栈顶加入 -1 元素代表一个 最后一个没有被匹配的右括号的下标
+        # 测试数据 ()()()
+        # 第二个 ) 栈 )(  计算: 1 - (-1) = 2
+        # 第四个 ) 栈 )(  计算: 3 - (-1) = 4
+        # 第六个 ) 栈 )(  计算: 5 - (-1) = 6
+        # 同样地 例子 )()()()
+        # 取代了了 之前的 索引为 -1 的右括号, 改为 索引为 0 的右括号
+        # 2 - 0
+        # 4 - 0
+        # 6- 0
 
-ss= ")()())"
+        stack = [-1]
+        res = 0
+        for i in range(len(s)):
+            if s[i] == '(':
+                stack.append(i)
+            else:
+                stack.pop()
+                if not stack:
+                    stack.append(i)
+                else:
+                    # 中间pop出的括号为连续的最长有效括号
+                    res = max(res, i - stack[-1])
+        return res
+
+
+ss = ")()())"
 a = Solution()
 print(a.longestValidParentheses(ss))

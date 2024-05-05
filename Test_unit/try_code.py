@@ -157,7 +157,14 @@ def func20():
     print(hash(dict1))
 
 
-func19()
+def func21():
+    d = {}
+    for i in [1, 3, 3, 4, 5]:
+        d[i] = d.setdefault(i, 0) + 1
+    print(d)
+
+
+func21()
 
 # func17()
 # func15()
