@@ -6,8 +6,9 @@ class Solution:
         # 举例
         # 初始 i
         # 翻转 n - i
-        # 二次翻转 k- (n-i)= k + i - n(以 0,k 区间中轴翻转)
-        # 二次翻转 k + i(以 k,n 区间中轴翻转)
+        # 有两种翻转清空
+        # 1 二次翻转 k- (n-i)= k + i - n (以 0,k 区间中轴翻转)
+        # 2 二次翻转 k + i (以 k,n 区间中轴翻转，从最后往前看 为 n-i，然后为 k + i )
         k = k % len(nums)
         self.reverse(nums, 0, len(nums) - 1)
         self.reverse(nums, 0, k - 1)
