@@ -22,7 +22,9 @@ class Solution:
         while i < nums_len:
             # nums[i] 为负数或者大于区间时，没有意义
             # 真正的循环条件时 是当前遍历值有对应的位置可去
-            if nums[i] > 0 and nums[i] <= nums_len and nums[nums[i] - 1] != nums[i]:
+            # nums[i] > 0 & & nums[i] < length & & nums[i] - 1 != i & & nums[nums[i] - 1] != nums[i]
+            # 增加条件 nums[nums[i] - 1] != nums[i]，避免由于存在重复值，导致死循环，即nums[nums[i] - 1] = nums[i]，已被提前写入
+            if 0 < nums[i] <= nums_len and nums[i] - 1 != i and nums[nums[i] - 1] != nums[i]:
                 nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
             else:
                 i += 1
