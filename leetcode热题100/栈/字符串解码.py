@@ -1,6 +1,5 @@
-
-
 import string
+
 
 class Solution:
     def decodeString(self, s: str) -> str:
@@ -41,6 +40,7 @@ class Solution:
         return ''.join(stack_str.pop())
 
     def decodeString2(self, s: str) -> str:
+        # 利用栈处理多层嵌套问题，将
         # 将 multi, res 组合存放在栈中
         stack = []
         multi, res = 0, ""
@@ -64,5 +64,30 @@ class Solution:
 
             elif ord(s[i]) <= ord('9') and ord(s[i]) >= ord('0'):
                 multi = multi * 10 + int(s[i])
+
+        return res
+
+    def decodeString3(self, s: str) -> str:
+        stack = []
+        multi, res = 0, ""
+        # 核心计算方法 res = pre_res + pre_multi * res
+        # 栈顶 不看multi,只看res
+
+        for i in range(len(s)):
+            if s[i] in string.ascii_lowercase:
+                res += s[i]
+            elif ord('0') <= ord(s[i]) <= ord('9'):
+                multi = multi * 10 + int(s[i])
+            elif s[i] == '[':
+                stack.append((multi, res))
+                multi, res = 0, ""
+            elif s[i] == ']':
+                # 3[5[ab]]
+                # stack 3 ""
+                # stack 5 ""
+                # 1 ] res = "ab" multi = 0
+                # 核心计算方法 res = pre_res + pre_multi * res
+                pre_multi, pre_res = stack.pop()
+                res = pre_res + pre_multi * res
 
         return res

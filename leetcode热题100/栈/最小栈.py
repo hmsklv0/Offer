@@ -12,6 +12,14 @@ class MinStack:
     def push(self, val: int) -> None:
         self.stack.append(val)
         # 注意<= ，保证相同的最小值能够进入最小栈，从而在pop的时候保证正确弹出最小栈中的值
+        # 举例
+        # stack     0 1 0
+        # minStack  0
+        # 第一次pop时，minStack为空了
+        # stack     [0 1]
+        # minStack  []
+        # 获取最小值时，就会出错
+        # 注意初始minStack为空的情况
         # 注意初始minStack为空的情况
         if not self.minStack or val <= self.minStack[-1]:
             self.minStack.append(val)

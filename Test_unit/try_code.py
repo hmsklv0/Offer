@@ -73,11 +73,27 @@ def func10():
 
 
 def func11():
+    # 测试复制效果
+    list1 = [[]] * 3
+    list2 = [[] * 3]
+    list3 = [] * 3
+    list4 = [[] for i in range(3)]
+    print(f"list1: {list1}")
+    print(f"list2: {list2}")
+    print(f"list3: {list3}")
+    print(f"list4: {list4}")
+
+    # [] * 3
+    # 该操作为复制 列表中的元素，将元素重复填充三次，实际上还是原本的一维数组
+
     # list浅层copy
     list1 = [[]] * 3
+    listx = [[] * 3]
     list3 = [None] * 3
     list2 = [[] for i in range(3)]
     print(list3)
+    print(listx)
+    print(list2)
     for i in [0, 1, 2]:
         list1[0].append(i)
         list2[0].append(i)
@@ -164,7 +180,7 @@ def func21():
     print(d)
 
 
-func21()
+func11()
 
 # func17()
 # func15()

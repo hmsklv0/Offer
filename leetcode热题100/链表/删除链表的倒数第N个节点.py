@@ -48,3 +48,20 @@ class Solution:
         if slow.next is not None:
             slow.next = slow.next.next
         return dummy_node.next
+
+    def removeNthFromEnd3(self, head: ListNode, n: int) -> ListNode:
+
+        dummy_node = ListNode(0, head)
+        slow, fast = dummy_node, dummy_node
+        i = 0
+        # 让 fast 先走 n 步，这样就可以保证后面 slow 少走 n 步， 因为是从哑节点开始算起，因此假设总共由 a 个节点，后面slow总共走 a - n步，到达第 a -n 个节点
+        # 即倒数第n个节点的前一个节点，然后删去这个节点
+        while i < n:
+            fast = fast.next
+            i += 1
+
+        while fast.next is not None:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
+        return dummy_node.next

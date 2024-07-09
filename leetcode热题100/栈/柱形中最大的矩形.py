@@ -10,6 +10,7 @@ class Solution:
         # 只要是遇到了当前柱形的高度比它上一个柱形的高度严格小的时候，
         # 一定可以确定它之前的某些柱形的最大宽度
         # 通过递增单调栈，快速计算当前高度的柱体对应的结果
+        # 0 1 2 3 4 3 2 1 0
 
         # 对应哨兵 0
         stack = [0]
@@ -25,8 +26,16 @@ class Solution:
         size = len(heights)
 
         for i in range(1, size):
-
+            # 当出现小于当前栈顶元素的情况时，需要计算面积
             while heights[i] < heights[stack[-1]]:
+                # 该 while 循环的逻辑为，为保持单调递增，因此将当前元素 heights[i] 添加进栈时
+                # 需要将大于当前元素的栈顶元素弹出
+                # 在弹出的过程中，保证了弹出元素 stack.pop() 大于当前元素
+                #
+                # 面积计算公式 heights[stack.pop()] * (i - stack[-1] - 1)
+                # 注意：弹出元素和当前元素之间均大于或等于stack.pop()
+                # 注意：(i - stack[-1] - 1)
+
                 # cur_width = i - stack[-1] -1
                 # 计算原理是什么
                 # 根据单调栈的原理，

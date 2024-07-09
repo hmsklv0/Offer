@@ -22,3 +22,26 @@ class Solution:
             return True
         else:
             return False
+
+    def isValid2(self, s: str) -> bool:
+
+        stack = []
+        dic = {'{': '}', '[': ']', '(': ')'}
+
+        # str_right = [')', '}', ']']
+        if len(s) % 2 == 1:
+            return False
+        for i in range(len(s)):
+            if s[i] in dic:
+                stack.append(s[i])
+            else:
+                # 如果当前栈为空，说明根本没有左括号可以匹配
+                # 当遇到右括号时，栈弹出栈顶元素，判断左括号是否和栈顶元素配对
+                if len(stack) == 0 or s[i] != dic[stack.pop()]:
+                    return False
+
+        # "(()()" 避免出现尾部字符匹配，而前部分字符没有匹配项的情况
+        if len(stack) == 0:
+            return True
+        else:
+            return False

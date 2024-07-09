@@ -45,3 +45,18 @@ class Solution:
             stack.append(i)
         return answer
 
+    def dailyTemperatures3(self, temperatures: List[int]) -> List[int]:
+        # 使用一个辅助栈，记录气温递减的状态，使用单调递减栈解决
+        stack = []
+
+        res = [0 for i in range(len(temperatures))]
+        stack = [0]
+        for i in range(1, len(temperatures)):
+            # 维护一个单调递减栈（非严格递减栈），如果出现大于栈顶元素的 temperatures[i]，相等不用变化，直接添加进栈
+            # 那么将循环遍历，将栈顶元素逐个弹出，然后计算相应的气温升高日期
+            # 直至栈顶元素大于 temperatures[i]，或者栈为空，然后将 temperatures[i] 的索引添加至单调递减栈
+            while len(stack) != 0 and temperatures[stack[-1]] < temperatures[i]:
+                index = stack.pop()
+                res[index] = i - index
+            stack.append(i)
+        return res

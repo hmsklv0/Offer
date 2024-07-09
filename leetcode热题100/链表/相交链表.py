@@ -1,6 +1,7 @@
 # 思路一，首先A先跑一次，然后记录所有的节点内存地址，遍历B进行对比
 # https://leetcode.cn/problems/intersection-of-two-linked-lists/solutions/10774/tu-jie-xiang-jiao-lian-biao-by-user7208t/?envType=study-plan-v2&envId=top-100-liked
 # 思路二，两者都走同样的路径，这样迟早会相遇
+# 两者相加，然后从后往前看，如果相交，那么，必定尾部的一段是重合的，或者说是相同的
 # pA:1->2->3->4->5->6->null->9->5->6->null
 # pB:9->5->6->null->1->2->3->4->5->6->null
 
