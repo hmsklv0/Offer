@@ -76,7 +76,8 @@ class Solution:
             left_max[i] = max(left_max[i - 1], height[i])
 
         right_max[-1] = height[-1]
-        for i in range(len(height) - 1, -1, -1):
+        # 修改为2
+        for i in range(len(height) - 2, -1, -1):
             right_max[i] = max(right_max[i + 1], height[i])
 
         ans = 0
